@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Become Vendor {% endblock title %}
+
+{% block content %}
+<div style="background-color: #85FFBD; height:60vh; display:flex; justify-content:center; align-items:center;">
+   <form method="post" >  
+             {% csrf_token %}  
+             <table>  
+                {{ form.as_p }} 
+                 <tr>  
+                    <td></td>  
+                    <td><input type="submit" name="submit" value="Đăng ký" /></td>  
+                </tr>  
+             </table>  
+         </form>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,28 @@
+<div class="column is-3 product-list-item">
+    <div class="box">
+        <figure class="image is-4by3 mb-4">
+            <img src="{{ product.image.url }}" alt="{{product.title}}">
+        </figure>
+
+        <h2 class="subtitle">{{product.title}}</h2>
+
+        <h3 class="price is-size-6 mb-5">{{product.price}} VNĐ</h3>
+
+        <hr>
+        <div class="row">
+            <a href="{% url 'product:product' product.category.slug product.slug %}" class="btn btn-info">Xem</a>
+            <form method="post" action="{% url 'product:product' product.category.slug product.slug %}">
+                {% csrf_token %}
+        
+                <div class="field has-addons">
+                    
+                    <input type="hidden" name="quantity" value="1" min="1" id="quantity">
+                    <button class="btn btn-outline-success">Thêm giỏ hàng</button>
+
+                </div>
+            </form>
+        </div>
+        
+        
+    </div>
+</div>

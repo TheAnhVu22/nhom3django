@@ -1,0 +1,68 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+    <div style="display: grid; grid-template-columns: repeat(2,1fr); gap: 2rem">
+
+    {% if product.image %}
+    <figure class="image is-4by3 mb-6">
+        <img src="{{product.image.url}}" alt="{{product.title}}">
+    </figure>
+    {% endif %}
+
+    <div>
+        <h1>Tên sản phẩm: {{product.title}}</h1>
+        <h1 class="title" style="color: red"> {{product.price}} VNĐ</h1>
+        
+    <p class="mb-6">
+        <span class="tag is-dark">
+            {% if product.quantity %}
+            Còn hàng
+            {% else %}
+                Hết hàng
+        {% endif %}</span>
+    </p>
+    <hr>
+    <p>{{product.description}}</p>
+    
+    <hr>
+    
+    {% if messages %}
+    {% for message in messages %}
+    <div class="notification is-success is-toast">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    
+    
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="field has-addons">
+            <div class="control" style="margin-right: 10px;">
+                Nhập số lượng: 
+                <input type="number" name="quantity" value="1" id="quantity">
+            </div>
+            
+            <div class="control">
+                <button class="btn btn-success">Thêm vào giỏ hàng</button>
+            </div>
+        </div>
+    </form>
+    
+    </div>
+    </div>
+
+    {% if similar_products %}
+        <hr>
+
+        <div class="columns is-multiline">
+            <div class="column is-12">
+                <h2 class="subtitle">Sản phẩm cùng danh mục</h2>
+            </div>
+
+            {% for product in similar_products %}
+                {% include 'product/parts/list_item.html' %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock content %}
